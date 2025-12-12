@@ -97,14 +97,9 @@
       </div>
     </div>
   <script>
-    let editingProduct = null; 
-
+      
     document.getElementById("add-button").onclick = () => {
-        editingProduct = null;
-        clearFields();
-        document.querySelector(".popup-content h2").textContent = "Add Product";
-        document.getElementById("confirmPopup").textContent = "Confirm";
-        document.getElementById("popup").style.display = "flex";
+    document.getElementById("popup").style.display = "flex";
     };
 
     document.getElementById("closePopup").onclick = closePopup;
@@ -112,13 +107,6 @@
 
     function closePopup() {
         document.getElementById("popup").style.display = "none";
-    }
-
-    function clearFields() {
-        document.getElementById("pname").value = "";
-        document.getElementById("pcategory").value = "";
-        document.getElementById("pdesc").value = "";
-        document.getElementById("pprice").value = "";
     }
 
     document.getElementById("confirmPopup").onclick = () => {
@@ -132,16 +120,6 @@
             return;
         }
 
-        if (editingProduct) {
-            editingProduct.querySelector(".name h3").textContent = name;
-            editingProduct.querySelector(".category p").textContent = cat;
-            editingProduct.querySelector(".description p").textContent = desc;
-            editingProduct.querySelector(".price-stock p").textContent = `₱${price}`;
-            editingProduct = null;
-            closePopup();
-            return;
-        }
-
         let container = document.getElementById("productList");
 
         let product = document.createElement("div");
@@ -150,8 +128,8 @@
         product.innerHTML = `
             <div class="product-info">
               <div class="name-category">
-                <div class="name">
-                  <h3>${name}</h3>
+                <div class="name" >
+                  <h3>${name}</h3>     
                 </div>
 
                 <div class="category">
@@ -159,67 +137,49 @@
                 </div>
               </div>
 
-              <div class="description">
-                <p><span class= "desc-text">${desc}</desc> <img class="edit-icon" src="/Background-Image/edit icon.png"></p>
-              </div>
+                <div class="description">
+                  <p >${desc}</p>
+                </div>
             </div>
-
             <div class="price-stock-button-delete-button">
                 <div class="price-stock">
                     <p>₱${price}</p>
                 </div>
 
-                <div class="button-group">
+                <div class = "button-group">
                     <button class="delete-btn">
-                      <img src="/Background-Image/delete icon.png">
+                      <img src="/Background-Image/delete icon.png" >
                     </button>
                     <button class="stock-toggle">
-                      <img class="in-stock" src="/Background-Image/toggle left.jpg">
+                    <img class= "in-stock" src="/Background-Image/toggle left.jpg" >
                     </button>
                 </div>
             </div>
         `;
 
-        product.querySelector(".edit-icon").onclick = () => openEdit(product);
-        product.querySelector(".delete-btn").onclick = () => product.remove();
-
-        const stockToggle = product.querySelector(".stock-toggle");
-        const stockImage = stockToggle.querySelector(".in-stock");
-
-         stockToggle.onclick = () => {
-        const currentSrc = stockImage.src.toLowerCase();
-        
-        if (currentSrc.includes("toggle left")) {
-            stockImage.src = "/Background-Image/toggle right.jpg";
-        } else {
-            stockImage.src = "/Background-Image/toggle left.jpg";
+      const stockToggle = product.querySelector(".in-stock");
+      const stockImg = stockToggle.querySelector("img")
+      
+      stockToggle.onclick = () => {
+        if(stockToggle.src.includes("toggle left.jpg")){
+          stockToggle.classList.add("in-stock");
+          stockToggle.src = "/Background-Image/Toggle right.jpg";
+        }else {
+          stockToggle.classList.remove("in-stock");
+          stockToggle.src = "/Background-Image/toggle left.jpg";
         }
-    };
+      };
+      
+      const deleteBtn = product.querySelector(".delete-btn");
+      deleteBtn.onclick = () => {
+        product.remove();
+      }
 
         container.appendChild(product);
+
         closePopup();
     };
-
-    function openEdit(product) {
-        editingProduct = product;
-
-        document.querySelector(".popup-content h2").textContent = "Edit Product";
-        document.getElementById("confirmPopup").textContent = "Save";
-
-        document.getElementById("pname").value =
-            product.querySelector(".name h3").textContent;
-        document.getElementById("pcategory").value =
-            product.querySelector(".category p").textContent;
-        document.getElementById("pdesc").value =
-            product.querySelector(".description p").textContent;
-
-        document.getElementById("pprice").value =
-            product.querySelector(".price-stock p").textContent.replace("₱", "");
-
-        document.getElementById("popup").style.display = "flex";
-    }
-</script>
-
+  </script>
 
   </body>
-  </html> 
+  </html>

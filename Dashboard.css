@@ -391,25 +391,43 @@ body {
 .category p {
   font-family: 'Roboto Condensed';
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: #8B6F47;
   margin: 0;
 }
 .description {
   display: flex;
-  max-width: 50%;
-  height: 50%;
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-  word-break: break-word;
+  max-width: 600px;
+  margin-top: 8px;
+  color: #6d4f2f;
   white-space: normal;
+  word-wrap: break-word;
+  word-break: break-word;
 }
-.description p {
+.desc-text {
+  display: inline;
+  flex: 1;
   font-family: 'Inter';
   font-size: 16px;
   color: #8B6F47;
   margin: 0;
   padding: 10px 0 0 0;
+}
+.edit-icon {
+    width: 15px;          
+    height: 15px;
+    margin-left: 8px;
+    cursor: pointer;
+    vertical-align: middle;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+.edit-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+.edit-button img {
+  width: 100%;
 }
 .price-stock-button-delete-button {
   display: flex;
@@ -430,8 +448,8 @@ body {
   gap: 10px;
   justify-content: center;
   align-items: center;
+  padding-top: 15px;
   vertical-align: bottom;
-  pointer-events: auto;
 }
 .delete-btn {
   border: none;
@@ -452,10 +470,4 @@ body {
   cursor: pointer;
   pointer-events: auto;
   z-index: 9999; 
-}
-.stock-toggle {
-  border: 2px solid red;
-}
-.stock-toggle.in-stock {
-  border-color: rgb(4, 174, 4);
 }
