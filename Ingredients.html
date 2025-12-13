@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="Ingredients.css">
     <link rel="stylesheet" href="Product.css">
+    <link rel="stylesheet" href="Orders.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lily+Script+One&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
@@ -40,7 +42,7 @@
           </div>
           <div class="cart">
             <img src="/Background-Image/cart.png" alt="">
-            <li><a href="Orders">Orders</a></li>
+            <li><a href="Orders.html">Orders</a></li>
           </div>
           <div class="report">
             <img src="/Background-Image/report.png" alt="">
@@ -50,14 +52,14 @@
       </div>
 
 
-      <div class="product-management-card">
-        <div class="title-add-products"> 
+      <div class="ingredients-management-card">
+        <div class="title-add-ingredients"> 
           <div class="title">
-            <p>Product Management</p>
+            <p>Ingredients Inventory</p>
           </div>
           <button id="add-button" class="add-btn">
             <span><img class="white" src="/Background-Image/Plus.png" alt=""></span>
-            <p>Add Product</p>
+            <p>Add Ingredients</p>
           </button>
         </div>
         <div id="search" class="search-container">
@@ -66,26 +68,31 @@
           <span><img id="filter-icon" class="icon" src="/Background-Image/filter icon.png" alt=""></span>
         </div>
 
-        <div id="productList" class="product-list"></div>
+        <div id="IngredientsList" class="ingredients-list"></div>
         <div id="popup" class="popup-container">
           <div class="popup-content">
             <span id="closePopup" class="close-btn">&times;</span>
-            <h2>Add Product</h2>
+            <h2>Add Ingredients</h2>
           
-            <label class="title">Product Name:</label>
-            <input type="text" id="pname" class="input-box-name">
+            <label class="title">Ingredients Name:</label>
+            <input type="text" id="ingname" class="input-box-ing-name">
 
-            <label class="title">Category:</label>
-            <input list="option" id="pcategory" class="input-box-category">
-            <datalist id="option">
-              <option value="Brewed Based"></option>
-            </datalist>
+            <label class="title">Unit:</label>
+            <input list="unit-options" id="unit" class="input-box-unit">
+              <datalist id="unit-options">
+                <option value="ML">ML (Milliliter)</option>
+                <option value="G">G (Gram)</option>
+                <option value="KG">KG (Kilogram)</option>
+                <option value="L">L (Liter)</option>
+                <option value="PCS">PCS (Pieces)</option>
+                <option value="OZ">OZ (Ounce)</option>
+              </datalist>
+            <label class="title">Pack/Bottle:</label>
+            <textarea id="pack" class="input-box-Pack-bottle"></textarea>
 
-            <label class="title">Description:</label>
-            <textarea id="pdesc" class="input-box-desc"></textarea>
-
-            <label class="title">Price:</label>
-            <input type="text" id="pprice" class="input-box-number">
+            <label class="title">Quantity:</label>
+            <input type="text" id="quantity" class="input-box-number">
+            
 
             <div class="popup-actions">
               <button id="cancelPopup" class="cancel-btn">Cancel</button>
@@ -94,92 +101,28 @@
           </div>
         </div>
 
+        <div id="deletePopup" class="popup-container">
+            <div class="popup-content">
+                <span id="closeDeletePopup" class="close-btn">&times;</span>
+                <h2>Delete Ingredient</h2>
+                
+                <div class="delete">
+                    <p>Are you sure you want to delete this ingredient?</p>
+                    <p >This action cannot be undone.</p>
+                </div>
+                
+                 <div class="popup-buttons">
+                  <div class="Delete-btn">
+                    <button id="confirmDelete" class="confirm-btn-delete">Delete</button>
+                  </div>
+                  <div class="Cancel-btn">
+                    <button id="cancelDelete" class="cancel">Cancel</button>
+                  </div>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
-  <script>
-      
-    document.getElementById("add-button").onclick = () => {
-    document.getElementById("popup").style.display = "flex";
-    };
-
-    document.getElementById("closePopup").onclick = closePopup;
-    document.getElementById("cancelPopup").onclick = closePopup;
-
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-    }
-
-    document.getElementById("confirmPopup").onclick = () => {
-        let name = document.getElementById("pname").value;
-        let cat = document.getElementById("pcategory").value;
-        let desc = document.getElementById("pdesc").value;
-        let price = document.getElementById("pprice").value;
-
-        if (!name || !cat || !desc || !price) {
-            alert("Fill all fields");
-            return;
-        }
-
-        let container = document.getElementById("productList");
-
-        let product = document.createElement("div");
-        product.className = "product-item";
-
-        product.innerHTML = `
-            <div class="product-info">
-              <div class="name-category">
-                <div class="name" >
-                  <h3>${name}</h3>     
-                </div>
-
-                <div class="category">
-                  <p>${cat}</p>
-                </div>
-              </div>
-
-                <div class="description">
-                  <p >${desc}</p>
-                </div>
-            </div>
-            <div class="price-stock-button-delete-button">
-                <div class="price-stock">
-                    <p>₱${price}</p>
-                </div>
-
-                <div class = "button-group">
-                    <button class="delete-btn">
-                      <img src="/Background-Image/delete icon.png" >
-                    </button>
-                    <button class="stock-toggle">
-                    <img class= "in-stock" src="/Background-Image/toggle left.jpg" >
-                    </button>
-                </div>
-            </div>
-        `;
-
-      const stockToggle = product.querySelector(".in-stock");
-      const stockImg = stockToggle.querySelector("img")
-      
-      stockToggle.onclick = () => {
-        if(stockToggle.src.includes("toggle left.jpg")){
-          stockToggle.classList.add("in-stock");
-          stockToggle.src = "/Background-Image/Toggle right.jpg";
-        }else {
-          stockToggle.classList.remove("in-stock");
-          stockToggle.src = "/Background-Image/toggle left.jpg";
-        }
-      };
-      
-      const deleteBtn = product.querySelector(".delete-btn");
-      deleteBtn.onclick = () => {
-        product.remove();
-      }
-
-        container.appendChild(product);
-
-        closePopup();
-    };
-  </script>
-
+    <script src="Ingredients.js"></script>
   </body>
   </html>

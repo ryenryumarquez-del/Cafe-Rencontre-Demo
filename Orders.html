@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product</title>
+    <title>Document</title>
+    <link rel="stylesheet" href="Ingredients.css">
     <link rel="stylesheet" href="Product.css">
     <link rel="stylesheet" href="Orders.css">
-    <link rel="stylesheet" href="Ingredients.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lily+Script+One&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
@@ -19,14 +19,13 @@
   <body>
   </head>
   <body>
-
     <div class="dashborad-card">
       <div class="logo-title-btn">
         <div class="logo-title">
           <span class="logo"><img src="/Background-Image/Cafe Rencontre Logo.svg" alt=""></span>
           <p class="Text-title">Cafe Rencontre</p>
         </div>
-        <button id="back-button" class="back-btn">
+        <button id="back-button" class="back-b">
           <span class="back-icon"><img src="/Background-Image/back-btn.png" alt=""></span>
           <p>Back to Menu</p>
         </button>
@@ -35,7 +34,7 @@
         <ul class="nav-bar">
           <div class="products">
             <img src="/Background-Image/Box.png" alt="">
-            <li><a href="Products">Products</a></li>
+            <li><a href="Product.html">Products</a></li>
           </div>
           <div class="Ingredients">
             <img src="/Background-Image/storage.png" alt="">
@@ -52,73 +51,33 @@
         </ul>
       </div>
 
-      
-      <div class="product-management-card">
-        <div class="title-add-products"> 
+
+      <div class="ingredients-management-card">
+        <div class="title-add-ingredients"> 
           <div class="title">
-            <p>Product Management</p>
+            <p>Order Management</p>
           </div>
-          <button id="add-button" class="add-btn">
-            <span><img class="white" src="/Background-Image/Plus.png" alt=""></span>
-            <p>Add Product</p>
-          </button>
         </div>
         <div id="search" class="search-container">
           <span><img id="search-icon" class="icon" src="/Background-Image/magnifying glass.png" alt=""></span>
           <input class="search-bar" type="text" placeholder="Search">
           <span><img id="filter-icon" class="icon" src="/Background-Image/filter icon.png" alt=""></span>
         </div>
-        
-        <div id="productList" class="product-list"></div>
-        <div id="popup" class="popup-container">
-          <div class="popup-content">
-            <span id="closePopup" class="close-btn">&times;</span>
-            <h2>Add Product</h2>
-          
-            <label class="title">Product Name:</label>
-            <input type="text" id="pname" class="input-box-name">
 
-            <label class="title">Category:</label>
-            <input list="option" id="pcategory" class="input-box-category">
-            <datalist id="option">
-              <option value="Brewed Based"></option>
-            </datalist>
 
-            <label class="title">Description:</label>
-            <textarea id="pdesc" class="input-box-desc"></textarea>
-
-            <label class="title">Price:</label>
-            <input type="text" id="pprice" class="input-box-number">
-
-            <div class="popup-actions">
-              <button id="cancelPopup" class="cancel-btn">Cancel</button>
-              <button id="confirmPopup" class="confirm-btn">Confirm</button>
-            </div>
+        <div class="filter-tabs">
+              <button class="filter-tab active" data-status="all">All</button>
+              <button class="filter-tab" data-status="pending">Pending</button>
+              <button class="filter-tab" data-status="approved">Approved</button>
+              <button class="filter-tab" data-status="completed">Completed</button>
+              <button class="filter-tab" data-status="rejected">Rejected</button>
           </div>
-        </div>
-        <div id="deletePopup" class="popup">
-            <div class="popup-content">
-                <span id="closeDeletePopup" class="close">&times;</span>
-                <h2>Delete Product</h2>
-                
-                <div class="delete">
-                    <p>Are you sure you want to delete <strong id="deleteProductName"></strong>?</p>
-                    <p>This action cannot be undone.</p>
-                </div>
-                
-                <div class="popup-buttons">
-                  <div class="Delete-btn">
-                    <button id="confirmDelete" class="confirm-btn-delete">Delete</button>
-                  </div>
-                  <div class="Cancel-btn">
-                    <button id="cancelDelete" class="cancel">Cancel</button>
-                  </div>
-                </div>
-            </div>
-        </div>
+
+          <div id="ordersList"></div>
       </div>
     </div>
-    
-  <script src="Product.js"></script>
+    <script src="Orders.js"></script>
+    </div>
+  
   </body>
-  </html> 
+  </html>
